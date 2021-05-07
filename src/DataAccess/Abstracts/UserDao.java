@@ -8,8 +8,6 @@ public interface UserDao {
 
     void register(User user);
 
-    boolean getByMail(String mail);
-
-    List<String> getList();
+    List<User> getList();
 
 }

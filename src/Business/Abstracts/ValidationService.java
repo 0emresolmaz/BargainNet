@@ -6,5 +6,4 @@ import Entities.Concretes.User;
 public interface ValidationService {
 
     boolean validate(User user);
-    boolean login(User user);
 }

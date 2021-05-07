@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HibernateUserDao implements UserDao {
-    public static List<String> mailList = new ArrayList<>();
+    public static List<User> userlist = new ArrayList<>();
 
     @Override
     public void register(User user) {
@@ -16,15 +16,7 @@ public class HibernateUserDao implements UserDao {
     }
 
     @Override
-    public boolean getByMail(String mail) {
-        if (mailList.contains(mail)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public List<String> getList() {
-        return mailList;
+    public List<User> getList() {
+        return userlist;
     }
 }

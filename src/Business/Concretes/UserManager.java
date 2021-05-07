@@ -22,11 +22,4 @@ public class UserManager implements UserService {
             userDao.register(user);
         }
     }
-
-    @Override
-    public void Login(User user) {
-        if (validationService.login(user)) {
-
-        }
-    }
 }

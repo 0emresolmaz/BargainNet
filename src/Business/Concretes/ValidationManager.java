@@ -13,17 +13,8 @@ public class ValidationManager implements ValidationService {
 
     @Override
     public boolean validate(User user) {
-        if (rules(user) & isRegistered(user.mail)) {
-            dao.getList().add(user.mail);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean login(User user) {
-        if (dao.getByMail(user.mail)) {
-            System.out.println(Messages.SuccessLogin + " : " + user.firstName + " " + user.lastName);
+        if (rules(user) & isRegistered(user)) {
+            dao.getList().add(user);
             return true;
         }
         return false;
@@ -71,12 +62,14 @@ public class ValidationManager implements ValidationService {
         return true;
     }
 
-    private boolean isRegistered(String mail) {
-        if (dao.getList().contains(mail)) {
-            System.out.println(Messages.emailIsAlreadyRegistered + " : " + mail);
-            return false;
+    private boolean isRegistered(User user) {
+
+        for (User myUser : dao.getList()) {
+            if (myUser.mail.equals(user.mail)) {
+                System.out.println(Messages.emailIsAlreadyRegistered + " : " + user.mail);
+                return false;
+            }
         }
         return true;
     }
-
 }
