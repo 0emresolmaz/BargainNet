@@ -1,7 +1,9 @@
 # BargainNet
 
 Kullanıcılar sisteme bilgilerini girerek üye olabilmelidir.
+
 • Sisteme temel kullanıcı bilgileri , e-posta ve parolayla üye olunabilmelidir. Temel kullanıcı bilgileri : ad, soyad, e-posta, parola. Temel bilgilerin tamamı zorunludur.
+
 • Parola en az 6 karakterden oluşmalıdır.
 • E-posta alanı e-posta formatında olmalıdır.
 • E-Posta daha önce kullanılmamış olmalıdır.
