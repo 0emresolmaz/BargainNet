@@ -1,5 +1,7 @@
 package Business.Abstracts;
 
+import Entities.Concretes.User;
+
 public interface GmailService {
-    void checkGmail();
+    boolean checkGmail(User user);
 }

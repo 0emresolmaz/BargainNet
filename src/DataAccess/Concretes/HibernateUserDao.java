@@ -12,7 +12,7 @@ public class HibernateUserDao implements UserDao {
 
     @Override
     public void register(User user) {
-        System.out.println("" + Messages.UserRegistered + " : " + user.firstName + " " + user.lastName + "\n");
+        System.out.println("" + Messages.UserRegistered + " : " + user.firstName + " " + user.lastName);
     }
 
     @Override

@@ -2,6 +2,7 @@ package Business.Concretes;
 
 import Business.Abstracts.ValidationService;
 import Business.Constants.Messages;
+import Core.Adapter.GmailManagerAdapter;
 import DataAccess.Concretes.HibernateUserDao;
 import Entities.Concretes.User;
 
@@ -9,17 +10,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidationManager implements ValidationService {
-    HibernateUserDao dao;
+    private HibernateUserDao dao;
+    private GmailManagerAdapter adapter;
 
-    public ValidationManager(HibernateUserDao dao) {
+    public ValidationManager(HibernateUserDao dao, GmailManagerAdapter adapter) {
         this.dao = dao;
+        this.adapter = adapter;
     }
 
     @Override
     public boolean validate(User user) {
         if (rules(user) & isRegistered(user)) {
-            System.out.println("\n\nDoğrulama maili gönderildi : " +user.firstName +" "+user.lastName);
-            System.out.println("Kullanıcı doğrulama mailine onay verdi : " +user.firstName +" "+user.lastName);
+            System.out.println("Doğrulama maili gönderildi : " + user.firstName + " " + user.lastName);
+            System.out.println("Kullanıcı doğrulama mailine onay verdi : " + user.firstName + " " + user.lastName);
             dao.getList().add(user);
             return true;
         }
@@ -37,7 +40,8 @@ public class ValidationManager implements ValidationService {
     }
 
     private boolean rules(User user) {
-        if (isFirstName(user.firstName) & isLastName(user.lastName) & isPassword(user.password) & isEmailFormat(user.mail)) {
+        if (isGoogleMail(user) & isFirstName(user.firstName) & isLastName(user.lastName) &
+                isPassword(user.password) & isEmailFormat(user.mail)) {
             return true;
         }
         return false;
@@ -87,5 +91,14 @@ public class ValidationManager implements ValidationService {
             }
         }
         return true;
+    }
+
+    private boolean isGoogleMail(User user) {
+        if (adapter.checkGmail(user)) {
+            System.out.println("\nMail adresi geçerli :Google mail" + " > " + user.mail);
+            return true;
+        }
+        System.out.println("\nMail adresi geçersiz :Google mail" + " > " + user.mail);
+        return false;
     }
 }
