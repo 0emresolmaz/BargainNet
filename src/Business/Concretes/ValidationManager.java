@@ -9,13 +9,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidationManager implements ValidationService {
-    HibernateUserDao dao = new HibernateUserDao();
+    HibernateUserDao dao;
+
+    public ValidationManager(HibernateUserDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public boolean validate(User user) {
         if (rules(user) & isRegistered(user)) {
+            System.out.println("\n\nDoğrulama maili gönderildi : " +user.firstName +" "+user.lastName);
+            System.out.println("Kullanıcı doğrulama mailine onay verdi : " +user.firstName +" "+user.lastName);
             dao.getList().add(user);
             return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean login(String mail, String password) {
+        for (User myUser : dao.getList()) {
+            if (myUser.mail.equals(mail) & myUser.password.equals(password)) {
+                return true;
+            }
         }
         return false;
     }

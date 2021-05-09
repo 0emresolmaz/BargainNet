@@ -11,4 +11,5 @@ public class Messages {
 
     public static String emailIsAlreadyRegistered = "Mail adresi sistemde zaten kayıtlı";
 
+    public static String ErrorPasswordEmail = "Yanlış mail ya da password";
 }
