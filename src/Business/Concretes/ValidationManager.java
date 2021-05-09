@@ -3,6 +3,7 @@ package Business.Concretes;
 import Business.Abstracts.ValidationService;
 import Business.Constants.Messages;
 import Core.Adapter.GmailManagerAdapter;
+import DataAccess.Abstracts.UserDao;
 import DataAccess.Concretes.HibernateUserDao;
 import Entities.Concretes.User;
 
@@ -10,10 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidationManager implements ValidationService {
-    private HibernateUserDao dao;
+    private UserDao dao;
     private GmailManagerAdapter adapter;
 
-    public ValidationManager(HibernateUserDao dao, GmailManagerAdapter adapter) {
+    public ValidationManager(UserDao dao, GmailManagerAdapter adapter) {
         this.dao = dao;
         this.adapter = adapter;
     }
